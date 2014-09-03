@@ -28,8 +28,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
-import mbanje.kurt.todo.BuildConfig;
-
 
 /**
  * This is a dynamic content Provider that maps all objects that were instantiated in the {@link BaseDataStore} class as tables
@@ -42,14 +40,18 @@ public abstract class BaseProvider extends ContentProvider {
     public static final int PROVIDE_TABLE = 0x029;
     public static final int PROVIDE_URI = 0x030;
     public static final int PROVIDE_KEY = 0x035;
-
-    private BaseDataStore sqLite;
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    private BaseDataStore sqLite;
+
+    public static final Uri getContentUri(String contentString) {
+        String string = contentString.replace("#AUTHORITY#", DroidProviderContract.CONTENT_AUTHORITY);
+        return Uri.parse(string);
+    }
 
     @Override
     public boolean onCreate() {
         sqLite = getMyDB();
-        String authority = getAuthority();
+        String authority = DroidProviderContract.CONTENT_AUTHORITY;
         for (ProviderObjectValue pv : sqLite.getObjectValues()) {
             sURIMatcher.addURI(authority, pv.TABLE, pv.MANY);
             sURIMatcher.addURI(authority, pv.TABLE + "/#", pv.ONE);
@@ -58,11 +60,6 @@ public abstract class BaseProvider extends ContentProvider {
     }
 
     public abstract BaseDataStore getMyDB();
-
-    public static String getAuthority() {
-        return BuildConfig.PROVIDER_AUTHORITY;
-    }
-
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
@@ -125,7 +122,6 @@ public abstract class BaseProvider extends ContentProvider {
         }
     }
 
-
     @Override
     public int bulkInsert(Uri uri, ContentValues[] values) {
         int uriType = sURIMatcher.match(uri);
@@ -166,9 +162,6 @@ public abstract class BaseProvider extends ContentProvider {
                 found = true;
                 break;
             }
-            if (uriType == pv.ONE) {
-                queryBuilder.appendWhere(pv.KEY + "=" + uri.getLastPathSegment());
-            }
         }
 
         if (!found) {
@@ -197,11 +190,5 @@ public abstract class BaseProvider extends ContentProvider {
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return rowsAffected;
-    }
-
-    public static final Uri getContentUri(String contentString) {
-        String string = contentString.replace("#AUTHORITY#", getAuthority());
-        Uri uri = Uri.parse(string);
-        return uri;
     }
 }

@@ -105,14 +105,14 @@ public class ProviderUtil {
         boolean added = false;
         for (Field field : fields) {
             Annotation annotation = field.getAnnotation(Column.class);
-            if (!Modifier.isStatic(field.getModifiers()) && (annotation != null) && (annotation instanceof Column) && !((Column) annotation).n().equals("_id")) {
+            if (!Modifier.isStatic(field.getModifiers()) && (annotation != null) && (annotation instanceof Column) && !((Column) annotation).name().equals("_id")) {
                 if (!firstField) {
                     queryBuilder.append(", ");
                 }
                 if (annotation instanceof Column) {
                     Column col = (Column) annotation;
-                    //					queryBuilder.append(col.n() + "" + (prefix!=null?prefix:"") + " ");
-                    queryBuilder.append(clazz.getSimpleName()).append(col.n()).append(prefix != null ? ("_" + prefix) : "").append(" ");
+                    //					queryBuilder.append(col.name() + "" + (prefix!=null?prefix:"") + " ");
+                    queryBuilder.append(clazz.getSimpleName()).append(col.name()).append(prefix != null ? ("_" + prefix) : "").append(" ");
                     added = true;
                 }
 
@@ -179,7 +179,7 @@ public class ProviderUtil {
         for (Field field : fields) {
             Annotation annotation = field.getAnnotation(Column.class);
             if (!Modifier.isStatic(field.getModifiers()) && (annotation != null)) {
-                if ((annotation instanceof Column) && !((Column) annotation).n().equals("_id")) {
+                if ((annotation instanceof Column) && !((Column) annotation).name().equals("_id")) {
                     Column col = (Column) annotation;
                     //                    LOG.d(tag,"getField: " + field.getName());
                     Field isf = field;
@@ -188,29 +188,29 @@ public class ProviderUtil {
                     }
                     if (String.class.isAssignableFrom(field.getType())) {
                         String val = (String) isf.get(obj);
-                        cv.put(col.n(), val);
+                        cv.put(col.name(), val);
                     } else if (field.getType() == Integer.TYPE) {
                         int val = isf.getInt(obj);
-                        cv.put(col.n(), val);
+                        cv.put(col.name(), val);
                     } else if (field.getType() == Long.TYPE) {
                         long val = isf.getLong(obj);
-                        cv.put(col.n(), val);
+                        cv.put(col.name(), val);
                     } else if (field.getType() == Boolean.TYPE) {
                         boolean val = isf.getBoolean(obj);
-                        cv.put(col.n(), val ? 1 : 0);
+                        cv.put(col.name(), val ? 1 : 0);
                     } else if (field.getType() == Float.TYPE) {
                         float val = isf.getFloat(obj);
-                        cv.put(col.n(), val);
+                        cv.put(col.name(), val);
                     } else if (field.getType() == Double.TYPE) {
                         double val = isf.getDouble(obj);
-                        cv.put(col.n(), val);
+                        cv.put(col.name(), val);
                     } else if (Date.class.isAssignableFrom(field.getType())) {
                         Date date = (Date) isf.get(obj);
                         if (date != null)
-                            cv.put(col.n(), date.getTime());
+                            cv.put(col.name(), date.getTime());
                     } else if (BigDecimal.class.isAssignableFrom(field.getType())) {
                         BigDecimal bigDecimal = (BigDecimal) isf.get(obj);
-                        cv.put(col.n(), bigDecimal.toEngineeringString());
+                        cv.put(col.name(), bigDecimal.toEngineeringString());
                     }
                     if (isf.getModifiers() == Modifier.PRIVATE) {
                         isf.setAccessible(false);
@@ -376,20 +376,20 @@ public class ProviderUtil {
                         field.setAccessible(true);
                     }
                     if (String.class.isAssignableFrom(field.getType())) {
-//                        LOG.d(tag, "[column: " + col.n() + "]");
-                        field.set(object, cursor.getString(cursor.getColumnIndex(col.n())));
+//                        LOG.d(tag, "[column: " + col.name() + "]");
+                        field.set(object, cursor.getString(cursor.getColumnIndex(col.name())));
                     } else if (field.getType() == Integer.TYPE) {
-                        field.set(object, cursor.getInt(cursor.getColumnIndex(col.n())));
+                        field.set(object, cursor.getInt(cursor.getColumnIndex(col.name())));
                     } else if (field.getType() == Long.TYPE) {
-                        field.set(object, cursor.getLong(cursor.getColumnIndex(col.n())));
+                        field.set(object, cursor.getLong(cursor.getColumnIndex(col.name())));
                     } else if (field.getType() == Boolean.TYPE) {
-                        field.set(object, cursor.getInt(cursor.getColumnIndex(col.n())) > 0 ? true : false);
+                        field.set(object, cursor.getInt(cursor.getColumnIndex(col.name())) > 0 ? true : false);
                     } else if (field.getType() == Float.TYPE) {
-                        field.set(object, cursor.getFloat(cursor.getColumnIndex(col.n())));
+                        field.set(object, cursor.getFloat(cursor.getColumnIndex(col.name())));
                     } else if (field.getType() == Double.TYPE) {
-                        field.set(object, cursor.getDouble(cursor.getColumnIndex(col.n())));
+                        field.set(object, cursor.getDouble(cursor.getColumnIndex(col.name())));
                     } else if (Date.class.isAssignableFrom(field.getType())) {
-                        field.set(object, new Date(cursor.getLong(cursor.getColumnIndex(col.n()))));
+                        field.set(object, new Date(cursor.getLong(cursor.getColumnIndex(col.name()))));
                     }
                     if (field.getModifiers() == Modifier.PRIVATE) {
                         field.setAccessible(false);
@@ -460,25 +460,25 @@ public class ProviderUtil {
         for (Field field : fields) {
             Annotation annotation = field.getAnnotation(Column.class);
             if (!Modifier.isStatic(field.getModifiers()) && (annotation != null)) {
-                if ((annotation instanceof Column) && !((Column) annotation).n().equals("_id")) {
+                if ((annotation instanceof Column) && !((Column) annotation).name().equals("_id")) {
                     Column col = (Column) annotation;
                     if (field.getModifiers() == Modifier.PRIVATE) {
                         field.setAccessible(true);
                     }
                     if (String.class.isAssignableFrom(field.getType())) {
-                        field.set(object, cursor.getString(cursor.getColumnIndex(clazz.getSimpleName() + col.n() + "_" + prefix)));
+                        field.set(object, cursor.getString(cursor.getColumnIndex(clazz.getSimpleName() + col.name() + "_" + prefix)));
                     } else if (field.getType() == Integer.TYPE) {
-                        field.set(object, cursor.getInt(cursor.getColumnIndex(clazz.getSimpleName() + col.n() + "_" + prefix)));
+                        field.set(object, cursor.getInt(cursor.getColumnIndex(clazz.getSimpleName() + col.name() + "_" + prefix)));
                     } else if (field.getType() == Long.TYPE) {
-                        field.set(object, cursor.getLong(cursor.getColumnIndex(clazz.getSimpleName() + col.n() + "_" + prefix)));
+                        field.set(object, cursor.getLong(cursor.getColumnIndex(clazz.getSimpleName() + col.name() + "_" + prefix)));
                     } else if (field.getType() == Boolean.TYPE) {
-                        field.set(object, cursor.getInt(cursor.getColumnIndex(clazz.getSimpleName() + col.n() + "_" + prefix)) > 0 ? true : false);
+                        field.set(object, cursor.getInt(cursor.getColumnIndex(clazz.getSimpleName() + col.name() + "_" + prefix)) > 0 ? true : false);
                     } else if (field.getType() == Float.TYPE) {
-                        field.set(object, cursor.getFloat(cursor.getColumnIndex(clazz.getSimpleName() + col.n() + "_" + prefix)));
+                        field.set(object, cursor.getFloat(cursor.getColumnIndex(clazz.getSimpleName() + col.name() + "_" + prefix)));
                     } else if (field.getType() == Double.TYPE) {
-                        field.set(object, cursor.getDouble(cursor.getColumnIndex(clazz.getSimpleName() + col.n() + "_" + prefix)));
+                        field.set(object, cursor.getDouble(cursor.getColumnIndex(clazz.getSimpleName() + col.name() + "_" + prefix)));
                     } else if (Date.class.isAssignableFrom(field.getType())) {
-                        field.set(object, new Date(cursor.getLong(cursor.getColumnIndex(clazz.getSimpleName() + col.n() + "_" + prefix))));
+                        field.set(object, new Date(cursor.getLong(cursor.getColumnIndex(clazz.getSimpleName() + col.name() + "_" + prefix))));
                     }
                     if (field.getModifiers() == Modifier.PRIVATE) {
                         field.setAccessible(false);
@@ -516,7 +516,7 @@ public class ProviderUtil {
         for (Field field : fields) {
             Annotation annotation = field.getAnnotation(Column.class);
             if (!Modifier.isStatic(field.getModifiers()) && (annotation != null)) {
-                if ((annotation instanceof Column) && !((Column) annotation).n().equals("_id")) {
+                if (!((Column) annotation).name().equals("_id")) {
                     if (field.getModifiers() == Modifier.PRIVATE) {
                         field.setAccessible(true);
                     }
@@ -546,7 +546,7 @@ public class ProviderUtil {
     }
 
     /**
-     * Create a table via reflection of a class anotated using the {@link Column} and {@link Index} anotations.
+     * Create a table via reflection of a class anotated using the {@link Column} annotation.
      *
      * @param clazz
      * @param table
@@ -571,7 +571,6 @@ public class ProviderUtil {
                 }
             }
         }
-        //		String name = clazz.getSimpleName();
         queryBuilder.append("CREATE TABLE ").append(table).append(" (");
         //		LOG.d(tag,"fields: " + fields);
         boolean firstField = true;
@@ -582,11 +581,11 @@ public class ProviderUtil {
                 if (!firstField) {
                     queryBuilder.append(", ");
                 }
-                if (annotation instanceof Column) {
-                    Column col = (Column) annotation;
-                    queryBuilder.append(col.n()).append(" ");
-                    added = true;
-                }
+
+                Column col = (Column) annotation;
+                queryBuilder.append(col.name()).append(" ");
+                added = true;
+
 
                 if (String.class.isAssignableFrom(field.getType())) {
                     queryBuilder.append("TEXT");
@@ -615,14 +614,11 @@ public class ProviderUtil {
                 mergeFields.add(new FieldValue(null, cm.c(), null, cm.seq()));
             }
 
-            Annotation annotationAtr = field.getAnnotation(Index.class);
-            if (annotationAtr != null) {
-                if (annotationAtr instanceof Index) {
-                    Index attr = (Index) annotationAtr;
-                    if (attr.primaryKey())
-                        queryBuilder.append(" PRIMARY KEY");
-                }
+            Column col = (Column) annotation;
+            if (col != null && col.primary()) {
+                queryBuilder.append(" PRIMARY KEY");
             }
+
             if (added) {
                 firstField = false;
             }
@@ -663,7 +659,7 @@ public class ProviderUtil {
             for (Field field : fields) {
                 Annotation annotation = field.getAnnotation(Column.class);
                 if (!Modifier.isStatic(field.getModifiers()) && (annotation != null)) {
-                    if ((annotation instanceof Column) && !((Column) annotation).n().equals("_id")) {
+                    if ((annotation instanceof Column) && !((Column) annotation).name().equals("_id")) {
 
                         Field isf = cls.getDeclaredField(field.getName());
                         if (String.class.isAssignableFrom(field.getType())) {

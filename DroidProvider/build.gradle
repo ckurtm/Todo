@@ -17,24 +17,27 @@
  *   https://github.com/ckurtm/DroidProvider
  */
 
-package com.peirr.droidprovider.sqlite.annotations;
+apply plugin: 'com.android.library'
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1"
 
-/**
- * this is a column
- *
- * @author kurt
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Column {
-    //name
-    String n();
+    defaultConfig {
+        applicationId "com.peirr.droidprovider"
+        minSdkVersion 8
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
 
-    //encrypt
-    boolean e() default false;
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }

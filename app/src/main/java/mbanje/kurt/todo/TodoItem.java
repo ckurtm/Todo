@@ -39,30 +39,24 @@ public class TodoItem extends ObjectTable {
     @Provide(BaseProvider.PROVIDE_KEY)
     public static final String KEY = Mapper._ID;
 
-    @Column(n = Mapper.label)
+    @Column(name = Mapper.label)
     public String label;
 
-    @Column(n = Mapper.description)
+    @Column(name = Mapper.description)
     public String description;
 
-    @Column(n = Mapper.completed)
+    @Column(name = Mapper.completed)
     public boolean completed;
 
 
-    public TodoItem() {}
+    public TodoItem() {
+    }
 
     public TodoItem(String label, String description, boolean completed) {
         this.label = label;
         this.description = description;
         this.completed = completed;
     }
-
-    public static final class Mapper extends ObjectMapper {
-        public static final String label = "label";
-        public static final String description = "description";
-        public static final String completed = "completed";
-    }
-
 
     @Override
     public String toString() {
@@ -72,7 +66,6 @@ public class TodoItem extends ObjectTable {
                 ", completed=" + completed +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -96,5 +89,11 @@ public class TodoItem extends ObjectTable {
         result = 31 * result + description.hashCode();
         result = 31 * result + (completed ? 1 : 0);
         return result;
+    }
+
+    public static final class Mapper extends ObjectMapper {
+        public static final String label = "label";
+        public static final String description = "description";
+        public static final String completed = "completed";
     }
 }

@@ -17,20 +17,11 @@
  *   https://github.com/ckurtm/DroidProvider
  */
 
-package com.peirr.droidprovider.sqlite.annotations;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package com.peirr.provider;
 
 /**
- * This is an Attribute annotation
- *
- * @author kurt 20 Apr 2013  11:04:37 PM
+ * Created by kurt on 2014/09/03.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Index {
-    public boolean primaryKey();
+public class ProviderContract {
+    public static final String CONTENT_AUTHORITY = "mbanje.kurt.todo.debug";
 }

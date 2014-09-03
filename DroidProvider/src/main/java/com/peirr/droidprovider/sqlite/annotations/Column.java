@@ -19,37 +19,25 @@
 
 package com.peirr.droidprovider.sqlite.annotations;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Base columns required for each provider enabled object->table mapping
+ * this is a column
  *
  * @author kurt
  */
-public class ObjectTable {
-    @Column(n = "_id", e = false)
-    @Index(primaryKey = true)
-    public long _id;
-    public static int ONE;
-    public static int MANY;
-    public static String CONTENT_ITEM_TYPE;
-    public static String CONTENT_TYPE;
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Column {
+    //name
+    String name();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    //encrypt the table column
+    boolean encrypt() default false;
 
-        ObjectTable objectTable = (ObjectTable) o;
-
-        if (_id != objectTable._id) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (_id ^ (_id >>> 32));
-        return result;
-    }
-
+    //if this column is the primary key
+    boolean primary() default false;
 }

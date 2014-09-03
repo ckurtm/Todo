@@ -47,7 +47,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-//import android.util.Log;
 
 /**
  * This is the database util class for handling reads & writes to app sqlite db
@@ -56,28 +55,9 @@ import javax.crypto.NoSuchPaddingException;
  * @playing [Say My Name (Cyril Hahn Remix)]
  */
 public abstract class BaseDataStore extends SQLiteSecureHelper {
+    String tag = BaseDataStore.class.getSimpleName();
     private List<ProviderObjectValue> objectValues = new ArrayList<ProviderObjectValue>();
 
-    public abstract List<Class<? extends ObjectTable>> getDefinedClasses();
-
-
-    String tag = BaseDataStore.class.getSimpleName();
-
-    public List<ProviderObjectValue> getObjectValues() {
-        return objectValues;
-    }
-
-    public Map<String, Class<?>> getDefinedObjects() throws IllegalArgumentException, NoSuchFieldException, IllegalAccessException {
-        Map<String, Class<?>> objects = new HashMap<String, Class<?>>();
-        List<Class<? extends ObjectTable>> definedClasses = getDefinedClasses();
-//		Log.d(tag,"defined classes: " + definedClasses.size());
-        for (Class<?> clazz : definedClasses) {
-            String[] data = ProviderUtil.getMetaDaTa(clazz);
-            objects.put(data[0], clazz);
-        }
-//		Log.d(tag,"defined objects: " + objects.size());
-        return objects;
-    }
 
     public BaseDataStore(Context context) {
         super(context);
@@ -88,6 +68,22 @@ public abstract class BaseDataStore extends SQLiteSecureHelper {
         } catch (Exception e) {
             Log.e(tag, e.getMessage(), e);
         }
+    }
+
+    public abstract List<Class<? extends ObjectTable>> getDefinedClasses();
+
+    public List<ProviderObjectValue> getObjectValues() {
+        return objectValues;
+    }
+
+    public Map<String, Class<?>> getDefinedObjects() throws IllegalArgumentException, NoSuchFieldException, IllegalAccessException {
+        Map<String, Class<?>> objects = new HashMap<String, Class<?>>();
+        List<Class<? extends ObjectTable>> definedClasses = getDefinedClasses();
+        for (Class<?> clazz : definedClasses) {
+            String[] data = ProviderUtil.getMetaDaTa(clazz);
+            objects.put(data[0], clazz);
+        }
+        return objects;
     }
 
     @Override
@@ -118,7 +114,6 @@ public abstract class BaseDataStore extends SQLiteSecureHelper {
      * @throws javax.crypto.IllegalBlockSizeException
      */
     public void createObjectValues() throws NoSuchAlgorithmException, NoSuchFieldException, InvalidKeyException, IllegalAccessException, NoSuchPaddingException, BadPaddingException, InvalidAlgorithmParameterException, UnsupportedEncodingException, ClassNotFoundException, IllegalBlockSizeException {
-//		Log.d(tag,"createObjectValues()");
         objectValues.clear();
         int i = 0;
         for (String key : getDefinedObjects().keySet()) {
