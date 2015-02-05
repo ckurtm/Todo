@@ -19,5 +19,5 @@
   -->
 
 <resources>
-    <string name="authority">mbanje.kurt.todo</string>
+    <string name="authority">mbanje.kurt.todo.debug</string>
 </resources>

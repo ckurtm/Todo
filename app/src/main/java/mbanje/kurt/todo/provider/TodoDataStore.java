@@ -20,9 +20,11 @@
 package mbanje.kurt.todo.provider;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.peirr.droidprovider.sqlite.BaseDataStore;
-import com.peirr.droidprovider.sqlite.annotations.ObjectTable;
+import com.peirr.droidprovider.sqlite.annotations.ObjectRow;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +37,24 @@ import mbanje.kurt.todo.TodoItem;
 public class TodoDataStore extends BaseDataStore {
 
     public TodoDataStore(Context context) {
-        super(context);
+        super(context,"base");
+    }
+
+//    @Override
+//    public List<Class<? extends ObjectTable>> getDefinedClasses() {
+//        List<Class<? extends ObjectTable>> tables = new ArrayList<Class<? extends ObjectTable>>();
+//        tables.add(TodoItem.class);
+//        return tables;
+//    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
     }
 
     @Override
-    public List<Class<? extends ObjectTable>> getDefinedClasses() {
-        List<Class<? extends ObjectTable>> tables = new ArrayList<Class<? extends ObjectTable>>();
+    public List<Class<? extends ObjectRow>> getDefinedClasses() {
+        List<Class<? extends ObjectRow>> tables = new ArrayList<Class<? extends ObjectRow>>();
         tables.add(TodoItem.class);
         return tables;
     }

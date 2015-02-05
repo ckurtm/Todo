@@ -20,32 +20,32 @@
 package mbanje.kurt.todo;
 
 import com.peirr.droidprovider.sqlite.BaseProvider;
-import com.peirr.droidprovider.sqlite.annotations.Column;
+import com.peirr.droidprovider.sqlite.annotations.DroidColumn;
+import com.peirr.droidprovider.sqlite.annotations.DroidProvider;
 import com.peirr.droidprovider.sqlite.annotations.ObjectMapper;
-import com.peirr.droidprovider.sqlite.annotations.ObjectTable;
-import com.peirr.droidprovider.sqlite.annotations.Provide;
+import com.peirr.droidprovider.sqlite.annotations.ObjectRow;
 
 /**
  * Created by kurt on 2014/07/18.
  */
-public class TodoItem extends ObjectTable {
+public class TodoItem extends ObjectRow {
 
-    @Provide(BaseProvider.PROVIDE_TABLE)
+    @DroidProvider(BaseProvider.PROVIDE_TABLE)
     public static final String TABLE = "todo";
 
-    @Provide(BaseProvider.PROVIDE_URI)
+    @DroidProvider(BaseProvider.PROVIDE_URI)
     public static final android.net.Uri CONTENT_URI = BaseProvider.getContentUri("content://#AUTHORITY#/" + TABLE);
 
-    @Provide(BaseProvider.PROVIDE_KEY)
+    @DroidProvider(BaseProvider.PROVIDE_KEY)
     public static final String KEY = Mapper._ID;
 
-    @Column(name = Mapper.label)
+    @DroidColumn(name = Mapper.label)
     public String label;
 
-    @Column(name = Mapper.description)
+    @DroidColumn(name = Mapper.description)
     public String description;
 
-    @Column(name = Mapper.completed)
+    @DroidColumn(name = Mapper.completed)
     public boolean completed;
 
 

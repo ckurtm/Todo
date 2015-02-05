@@ -41,7 +41,7 @@ android {
 
         release {
             buildConfigField "String", "PROVIDER_AUTHORITY", "\"mbanje.kurt.todo\""
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
@@ -50,5 +50,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
-    compile project(':DroidProvider')
+    compile 'mbanje.kurt:droidprovider:1.0.0'
+}
+
+
+task wrapper(type: Wrapper) {
 }

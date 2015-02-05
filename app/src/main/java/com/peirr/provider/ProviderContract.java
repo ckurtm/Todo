@@ -24,4 +24,6 @@ package com.peirr.provider;
  */
 public class ProviderContract {
     public static final String CONTENT_AUTHORITY = "mbanje.kurt.todo.debug";
+    public static final int CONTENT_VERSION = 1;
+
 }

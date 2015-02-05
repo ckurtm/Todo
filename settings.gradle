@@ -17,4 +17,4 @@
  *   https://github.com/ckurtm/DroidProvider
  */
 
-include ':app', ':DroidProvider'
+include ':app'
