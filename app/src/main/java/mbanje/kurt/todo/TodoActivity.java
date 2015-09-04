@@ -21,11 +21,8 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.peirr.droidprovider.sqlite.annotations.ProviderUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -164,14 +161,14 @@ public class TodoActivity extends Activity implements LoaderManager.LoaderCallba
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this,TodoItem.CONTENT_URI,null,null,null,null);
+        return new CursorLoader(this,TodoTable.CONTENT_URI,null,null,null,null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if(cursor != null){
             try {
-                List<TodoItem> items = ProviderUtil.getRows(cursor,TodoItem.class);
+                List<TodoItem> items = TodoTable.getValues(cursor, false);
                 updateView(items);
             } catch (Exception e) {
                 Log.e(TAG,"error retreiving todo list",e);

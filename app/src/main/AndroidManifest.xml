@@ -22,7 +22,7 @@
         <provider
             android:authorities="@string/authority"
             android:exported="false"
-            android:name=".provider.TodoProvider"/>
+            android:name=".TodoProvider"/>
     </application>
 
 </manifest>

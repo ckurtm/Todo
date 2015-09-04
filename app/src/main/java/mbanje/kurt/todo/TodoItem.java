@@ -19,33 +19,26 @@
 
 package mbanje.kurt.todo;
 
-import com.peirr.droidprovider.sqlite.BaseProvider;
-import com.peirr.droidprovider.sqlite.annotations.DroidColumn;
-import com.peirr.droidprovider.sqlite.annotations.DroidProvider;
-import com.peirr.droidprovider.sqlite.annotations.ObjectMapper;
-import com.peirr.droidprovider.sqlite.annotations.ObjectRow;
+
+import ckm.simple.sql_provider.annotation.SimpleSQLColumn;
+import ckm.simple.sql_provider.annotation.SimpleSQLTable;
 
 /**
  * Created by kurt on 2014/07/18.
  */
-public class TodoItem extends ObjectRow {
+@SimpleSQLTable(table = "todo",provider = TodoProviderConfig.PROVIDER_CLASS)
+public class TodoItem {
 
-    @DroidProvider(BaseProvider.PROVIDE_TABLE)
-    public static final String TABLE = "todo";
+    @SimpleSQLColumn(value = "_id",primary = true)
+    public long _id;
 
-    @DroidProvider(BaseProvider.PROVIDE_URI)
-    public static final android.net.Uri CONTENT_URI = BaseProvider.getContentUri("content://#AUTHORITY#/" + TABLE);
-
-    @DroidProvider(BaseProvider.PROVIDE_KEY)
-    public static final String KEY = Mapper._ID;
-
-    @DroidColumn(name = Mapper.label)
+    @SimpleSQLColumn(Mapper.label)
     public String label;
 
-    @DroidColumn(name = Mapper.description)
+    @SimpleSQLColumn(Mapper.description)
     public String description;
 
-    @DroidColumn(name = Mapper.completed)
+    @SimpleSQLColumn(Mapper.completed)
     public boolean completed;
 
 
@@ -91,7 +84,7 @@ public class TodoItem extends ObjectRow {
         return result;
     }
 
-    public static final class Mapper extends ObjectMapper {
+    public static final class Mapper {
         public static final String label = "label";
         public static final String description = "description";
         public static final String completed = "completed";

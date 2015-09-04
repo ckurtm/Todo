@@ -24,9 +24,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import com.peirr.droidprovider.sqlite.annotations.ProviderUtil;
 
 import mbanje.kurt.todo.TodoItem;
+import mbanje.kurt.todo.TodoTable;
 
 /**
  * Created by kurt on 2014/07/19.
@@ -38,7 +38,7 @@ public class TodoHelper {
 
     public static Uri createTodo(ContentResolver resolver, TodoItem item){
         try {
-            Uri uri = resolver.insert(TodoItem.CONTENT_URI, ProviderUtil.getContentValues(item, false));
+            Uri uri = resolver.insert(TodoTable.CONTENT_URI, TodoTable.getContentValues(item,false));
             if (uri != null) {
                 Log.d(TAG,"added new task");
             }
@@ -51,7 +51,7 @@ public class TodoHelper {
 
     public static int deleteTodo(ContentResolver resolver, TodoItem item){
         try {
-            int result = resolver.delete(TodoItem.CONTENT_URI, TodoItem.Mapper._ID + "=?", new String[]{String.valueOf(item._id)});
+            int result = resolver.delete(TodoTable.CONTENT_URI, TodoTable.FIELD_LABEL + "=?", new String[]{String.valueOf(item.label)});
             if(result > 0){
                 Log.d(TAG,"deleted task");
             }
@@ -62,11 +62,11 @@ public class TodoHelper {
         return -1;
     }
 
-    public static TodoItem getTodo(ContentResolver resolver, long id){
+    public static TodoItem getTodo(ContentResolver resolver, String id){
         try {
-            Cursor cursor = resolver.query(TodoItem.CONTENT_URI,null,TodoItem.Mapper._ID + "=?", new String[]{String.valueOf(id)},null);
+            Cursor cursor = resolver.query(TodoTable.CONTENT_URI,null,TodoTable.FIELD_LABEL +  "=?", new String[]{String.valueOf(id)},null);
             cursor.moveToFirst();
-            return ProviderUtil.getRow(cursor,TodoItem.class);
+            return TodoTable.getValue(cursor, true);
         } catch (Exception e) {
             Log.e(TAG, "error getting item: ",e);
         }
@@ -75,7 +75,7 @@ public class TodoHelper {
 
     public static int updateTodo(ContentResolver resolver, TodoItem item){
         try {
-            return resolver.update(TodoItem.CONTENT_URI, ProviderUtil.getContentValues(item, true), TodoItem.Mapper._ID + "=?", new String[]{String.valueOf(item._id)});
+            return resolver.update(TodoTable.CONTENT_URI, TodoTable.getContentValues(item,false), TodoTable.FIELD_LABEL + "=?", new String[]{String.valueOf(item.label)});
         } catch (Exception e) {
             Log.e(TAG, "error updating item...",e);
         }
@@ -83,7 +83,7 @@ public class TodoHelper {
     }
 
     public static void deleteAll(ContentResolver resolver){
-        resolver.delete(TodoItem.CONTENT_URI,null,null);
+        resolver.delete(TodoTable.CONTENT_URI,null,null);
     }
 
 }
