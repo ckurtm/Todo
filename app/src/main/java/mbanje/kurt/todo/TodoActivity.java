@@ -7,6 +7,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,7 +32,7 @@ import mbanje.kurt.todo.provider.TodoHelper;
 import mbanje.kurt.todo.widget.ProgressView;
 
 
-public class TodoActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class TodoActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private String TAG = TodoActivity.class.getSimpleName();
     private TextView completed;

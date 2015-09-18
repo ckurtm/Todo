@@ -1,28 +1,16 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light">
-        <item name="android:actionBarStyle">@style/TodoActionBar</item>
-        <item name="android:actionBarTabTextStyle">@style/TodoActionBarTabText</item>
-        <item name="android:actionMenuTextColor">@android:color/black</item>
-        <item name="android:listChoiceIndicatorMultiple">@drawable/checkbox_theme</item>
-
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">#1c95d6</item>
+        <item name="colorPrimaryDark">#126794</item>
+        <item name="colorAccent">@color/main</item>
     </style>
 
-    <style name="TodoActionBar"  parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/main</item>
-        <item name="android:titleTextStyle">@style/TodoActionBarTitleText</item>
-    </style>
-
-    <!-- ActionBar title text -->
-    <style name="TodoActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@android:color/black</item>
-    </style>
-
-    <!-- ActionBar tabs text styles -->
-    <style name="TodoActionBarTabText" parent="@android:style/Widget.Holo.ActionBar.TabText">
-        <item name="android:textColor">@android:color/black</item>
-    </style>
+    <!--<style name="TodoActionBar"  parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">-->
+        <!--<item name="android:background">@color/main</item>-->
+        <!--<item name="android:titleTextStyle">@style/TodoActionBarTitleText</item>-->
+    <!--</style>-->
 
 
     <style name="DialogAnim">

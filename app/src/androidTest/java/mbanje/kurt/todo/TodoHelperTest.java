@@ -64,7 +64,7 @@ public class TodoHelperTest extends ProviderTestCase2<TodoProvider> {
         Uri uri = TodoHelper.createTodo(resolver, item);
         assertNotNull(uri);
         long id = ContentUris.parseId(uri);
-//        item._id = id;
+        item._id = id;
 
         //UPDATE
         item.label = "kurt";
