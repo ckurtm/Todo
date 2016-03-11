@@ -38,12 +38,12 @@ public class TodoActivityTest extends ActivityInstrumentationTestCase2<TodoActiv
     private Solo solo;
 
     private TodoItem[] items = new TodoItem[]{
-            new TodoItem("One","description for task one",false),
-            new TodoItem("Two","description for task two",false),
-            new TodoItem("Three","description for task three",false),
-            new TodoItem("Four","description for task four",false),
-            new TodoItem("Five","description for task five",false),
-            new TodoItem("Six","description for task six",false)
+            new TodoItem("Buy milk","pass thru spar and buy some milk",false),
+            new TodoItem("Car wash","..sigh, have to do this",false),
+            new TodoItem("B-ball session","arrange with the guys",false),
+            new TodoItem("Call Dad","I have to do this",false),
+            new TodoItem("Call Investor","description for task five",false),
+            new TodoItem("Kittens","description for task six",false)
     };
 
     /**
