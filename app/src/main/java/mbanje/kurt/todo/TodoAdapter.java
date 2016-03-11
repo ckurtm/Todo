@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import mbanje.kurt.todo.models.TodoItem;
 import mbanje.kurt.todo.provider.TodoHelper;
 
 /**

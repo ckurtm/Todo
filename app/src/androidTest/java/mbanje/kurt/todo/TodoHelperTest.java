@@ -26,6 +26,7 @@ import android.test.ProviderTestCase2;
 
 import java.io.IOException;
 
+import mbanje.kurt.todo.models.TodoItem;
 import mbanje.kurt.todo.provider.TodoHelper;
 
 /**

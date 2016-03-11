@@ -25,8 +25,8 @@ import android.net.Uri;
 import android.util.Log;
 
 
-import mbanje.kurt.todo.TodoItem;
-import mbanje.kurt.todo.TodoTable;
+import mbanje.kurt.todo.models.TodoItem;
+import mbanje.kurt.todo.models.TodoTable;
 
 /**
  * Created by kurt on 2014/07/19.
@@ -66,7 +66,7 @@ public class TodoHelper {
         try {
             Cursor cursor = resolver.query(TodoTable.CONTENT_URI,null,TodoTable.FIELD_LABEL +  "=?", new String[]{String.valueOf(id)},null);
             cursor.moveToFirst();
-            return TodoTable.getValue(cursor, true);
+            return TodoTable.getRow(cursor, true);
         } catch (Exception e) {
             Log.e(TAG, "error getting item: ",e);
         }

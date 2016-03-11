@@ -17,11 +17,12 @@
  *   https://github.com/ckurtm/DroidProvider
  */
 
-package mbanje.kurt.todo;
+package mbanje.kurt.todo.models;
 
 
 import ckm.simple.sql_provider.annotation.SimpleSQLColumn;
 import ckm.simple.sql_provider.annotation.SimpleSQLTable;
+import mbanje.kurt.todo.TodoProviderConfig;
 
 /**
  * Created by kurt on 2014/07/18.

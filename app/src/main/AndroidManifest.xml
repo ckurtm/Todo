@@ -20,7 +20,7 @@
         </activity>
 
         <provider
-            android:authorities="@string/authority"
+            android:authorities="${applicationId}.AUTHORITY"
             android:exported="false"
             android:name=".TodoProvider"/>
     </application>

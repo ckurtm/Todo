@@ -1,6 +1,5 @@
 package mbanje.kurt.todo;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -28,6 +27,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import mbanje.kurt.todo.models.TodoItem;
+import mbanje.kurt.todo.models.TodoTable;
 import mbanje.kurt.todo.provider.TodoHelper;
 import mbanje.kurt.todo.widget.ProgressView;
 
@@ -162,14 +163,14 @@ public class TodoActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this,TodoTable.CONTENT_URI,null,null,null,null);
+        return new CursorLoader(this, TodoTable.CONTENT_URI,null,null,null,null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if(cursor != null){
             try {
-                List<TodoItem> items = TodoTable.getValues(cursor, false);
+                List<TodoItem> items = TodoTable.getRows(cursor, false);
                 updateView(items);
             } catch (Exception e) {
                 Log.e(TAG,"error retreiving todo list",e);

@@ -9,7 +9,7 @@ import ckm.simple.sql_provider.annotation.SimpleSQLConfig;
  */
 @SimpleSQLConfig(
         name = TodoProviderConfig.PROVIDER_CLASS,
-        authority = "mbanje.kurt.todo.debug",
+        authority = BuildConfig.APPLICATION_ID + ".AUTHORITY",
         database = "test.db",
         version = 1)
 public class TodoProviderConfig implements ProviderConfig {

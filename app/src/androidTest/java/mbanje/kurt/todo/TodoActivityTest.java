@@ -20,16 +20,14 @@
 package mbanje.kurt.todo;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 
 import com.robotium.solo.Solo;
 
+import mbanje.kurt.todo.models.TodoItem;
 import mbanje.kurt.todo.provider.TodoHelper;
 import mbanje.kurt.todo.widget.ProgressView;
 
